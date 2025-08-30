@@ -179,20 +179,181 @@ console.log(WeatherConditon)
 console.log(`current weather is ${WeatherConditon.sunny} `)
 
 //Classes
-class Person {
+class Human {
     private first:string;
-    private last:string;
+    public last:string;
+    protected age:number;
 
-    constructor(first:string,last:string){
+    constructor(first:string,last:string ,age:number){
         this.first = first;
         this.last = last;
+        this.age = age;
     }
 
     getName() : string {
-        return `${this.first} ${this.last}`;
+        return `${this.first} ${this.last} Age: ${this.age}`;
     }
 
 }
+class Person extends Human{
+    constructor(first:string,last:string,age:number){
+        super(first,last,age);
+       
+    }
+}
 
-let p1 = new Person("John","Doe");
-console.log(p1.getName())
+const x9 = new Person("huxn","wef",30);
+console.log(x9);
+
+//Getters and Setters
+
+class myClass {
+    private _myProperty: number = 0;
+    
+    get myProperty() : number{
+        return this._myProperty;
+    }
+
+    set myProperty(value:number){
+        this._myProperty = value;
+    }
+}
+
+const myInstance = new myClass();
+
+console.log(`current value :  ${myInstance.myProperty}`)
+myInstance.myProperty = 100;
+console.log(`current value :  ${myInstance.myProperty}`)
+
+//Interface 
+
+interface computer {
+    readonly name: string;
+    ram?: number;
+    hdd: number;
+}
+
+const compExample : computer = {
+    name:"k9h",
+    ram:4,
+    hdd:120,
+};
+console.log(compExample.name, compExample.ram , compExample.hdd);
+
+//Interface for function
+
+interface MathOp {
+    (x:number,y:number) :number;
+}
+
+const add : MathOp = (a,b) => a+b;
+console.log(add(4,5));
+
+interface Man {
+    firstName: string;
+    lastName: string;
+    age: number;
+    sayHello(): void;
+}
+
+function meet(man:Man) {
+    console.log(`Hello, ${man.firstName} ${man.lastName}`);
+    man.sayHello();
+}
+
+const johns: Man = {
+    firstName: "John",
+    lastName: "cena",
+    age: 30,
+    sayHello(){
+        console.log("helo");
+    }
+}
+meet(johns);
+
+interface Song{
+    songName: string;
+    singerName: string;
+    printSongInfo(rating: number,genra: string) : string | number;
+}
+
+const song1 : Song = {
+    songName: "Natural",
+    singerName: "Imagin Drigon",
+    printSongInfo: (r,g) => {
+        return `Rating ${r}, Genra: ${g}`
+    }
+}
+
+console.log(song1.printSongInfo(8.9,"Imagin Drigon"))
+song1
+
+interface MoviesInfo {
+    readonly movieName: string;
+    readonly author: string;
+    Actors(actors: string[], rating : number) : string[] | string | number;
+}
+
+interface Genra extends MoviesInfo {
+    genra : string;
+}
+
+const chilgoza : Genra = {
+    movieName : "Chilgoza Prince",
+    author : "Vivek",
+    genra : "Action & Drama",
+    Actors: (actors,rating) => {
+       return `Actors ${[...actors,"champin"]} & Raing ${rating}`
+    }
+}
+
+console.log(chilgoza.Actors( ["Minion Prince","Archer Qween","Warden","King"],9));
+
+//Interface with classes
+
+interface Vechile {
+    start(): void;
+    stop():void;
+}
+
+class Car implements Vechile{
+    start(){
+        console.log('Car is starting...')
+    }
+    stop(){
+        console.log('Car is stopping...')
+    }
+}
+
+const myCar = new Car()
+myCar.start(); 
+myCar.stop();
+
+//Declaration merging
+
+//Orignal Interface
+
+interface Car{
+    brand: string;
+    start(): void;
+}
+
+interface Car{
+    model : string;
+    stop():void;
+}
+
+const mycar : Car = {
+    brand: "combra",
+    model : "GT900",
+    start(){
+        console.log("Car is Starting...")
+    },
+    stop(){
+        console.log("Car is stopping...");
+    }
+}
+mycar
+mycar.start();
+mycar.stop();
+
