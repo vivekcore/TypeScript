@@ -35,10 +35,10 @@ function greet(person:string = "anonymous") {
 console.log(greet());
 
 //Return annotation
-function num(x:number):number {
+function num3(x:number):number {
     return x*x;
 }
-console.log(num(8));
+console.log(num3(8));
 
 const double2 = (x:number) : number => x*x;
 console.log(double2(4));
